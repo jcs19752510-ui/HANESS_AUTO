@@ -3,6 +3,7 @@
 20년차 개발/기획/설계/보안/디자인 담당자 기준으로 구성한 재사용 가능한 개발 파이프라인 하네스입니다.
 
 ## 구성
+- [USAGE-GUIDE.md](USAGE-GUIDE.md) — **처음 쓸 때 이 문서부터 읽는다.** 새 프로그램 시작 절차, 단계별 실전 진행법, 여러 프로그램 재사용 전략, 막혔을 때 체크리스트, 복붙용 예시 대화 모음.
 - [ORCHESTRATOR.md](ORCHESTRATOR.md) — 전체 플로우를 규정하는 마스터 프롬프트. 세션 시작 시 통째로 컨텍스트에 제공.
 - `.claude/agents/01-trend-analyst.md` ~ `12-post-deploy-verifier.md` — 각 단계별 Claude Code 서브에이전트 정의 (`Agent` 도구의 `subagent_type`으로 호출)
 - `templates/verification-log-template.md` — 모든 산출물에 적용하는 **최소 2회 내부 검증** 로그 양식
