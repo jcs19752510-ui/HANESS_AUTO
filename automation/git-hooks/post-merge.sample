@@ -1,0 +1,10 @@
+#!/bin/sh
+# 예시 훅 — 실제로 쓰려면 .git/hooks/post-merge 로 복사하고 실행권한을 준 뒤(chmod +x),
+# run-harness-agent.sh(플레이스홀더)를 실제 실행 방식으로 바꿔야 한다.
+#
+# work unit 브랜치가 로컬에 병합되면, 곧바로 6단계(단위테스트)를 트리거한다는 예시.
+# 규칙 A(질문 필요) 상황이 발생하면 이 스크립트는 종료 코드 0이 아닌 값으로 끝내고
+# 사람에게 알림을 보내는 방식으로 구현해야 한다 (강제로 다음 커밋을 진행시키지 않는다).
+
+echo "[harness] post-merge 감지 — 6단계(단위테스트) 트리거 대상인지 확인하세요."
+echo "[harness] 실제 실행: ./automation/run-harness-agent.sh 06-unit-tester (플레이스홀더, 팀에서 구현 필요)"
