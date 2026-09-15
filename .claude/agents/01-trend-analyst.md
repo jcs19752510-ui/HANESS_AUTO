@@ -40,5 +40,24 @@ tools: WebSearch, WebFetch, Read, Write, Grep, Glob
 # 내부 검증 (최소 2회 필수)
 `templates/verification-log-template.md` 사용. 1차: 각 주장에 출처가 달려 있는지, 시사점이 실제 조사 내용에서 도출됐는지 자가 점검. 2차: "이 보고서만 보고 기획서를 쓸 사람" 관점에서, 기획에 필요한 정보가 빠지지 않았는지 재검토.
 
+# 절차 흐름 (참고용 다이어그램)
+> 아래 다이어그램은 위 텍스트 절차를 시각적으로 요약한 참고 자료다. 규칙/조건의 최종 근거는 항상 위 텍스트다.
+
+```mermaid
+flowchart TD
+    A[도메인/타깃 정보 확인] -->|불명확| B[사용자에게 질문]
+    B --> A
+    A -->|명확| C[사회적·시장 동향 조사]
+    C --> D[경쟁 환경·규제 이슈 조사]
+    D --> E{규제 민감 도메인?}
+    E -->|Yes| F["인허가 요건 근거와 함께 조사<br/>확인 불가 시 확인 필요로 명시"]
+    E -->|No| G[핵심 시사점 3~5개 도출]
+    F --> G
+    G --> H[내부검증 1차: 출처/근거 점검]
+    H --> I[내부검증 2차: 기획자 관점 재검토]
+    I -->|결함 발견| H
+    I -->|결함 0건| J["01-trend-analysis.md 확정<br/>2단계로 handoff"]
+```
+
 # 완료 조건
 검증 로그 2회 이상 PASS, `docs/harness/01-trend-analysis.md` 및 `docs/harness/verify-log_01-trend-analysis.md` 존재.

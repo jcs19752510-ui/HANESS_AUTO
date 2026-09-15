@@ -33,3 +33,20 @@ git push origin PROD_SCH
 
 # 12. 원격소스 로컬 브랜치에 내리기
 git pull origin PROD_SCH
+
+<!--
+참고용 다이어그램(최종 근거는 위 명령어 자체):
+-->
+```mermaid
+flowchart TD
+    A["1. git init"] --> B["2~3. 이메일/이름 등록"]
+    B --> C["4. remote add origin"]
+    C --> D["5. git fetch origin"]
+    D --> E["6. git pull origin PROD_SCH"]
+    E --> F["7. git branch PROD_SCH"]
+    F --> G["8. git switch PROD_SCH"]
+    G --> H["9. git add ."]
+    H --> I["10. git commit -m ..."]
+    I --> J["11. git push origin PROD_SCH"]
+    J --> K["12. git pull origin PROD_SCH"]
+```

@@ -12,6 +12,28 @@
 - `github-actions-harness.yml` — 위 스크립트를 호출하는 GitHub Actions 예시. 브랜치/태그 이벤트에 따라 5~11, 13단계를 매핑하고, 12단계(배포)는 GitHub Environments의 `required reviewers` 보호 규칙으로 사람 승인 없이는 절대 실행되지 않도록 게이트를 건다 (**이 environment 보호 규칙은 GitHub 저장소 Settings에서 직접 등록해야 하며, 파일만으로는 걸리지 않는다**).
 - `git-hooks/post-merge.sample` — work unit 브랜치가 로컬에 병합됐을 때 6단계(단위테스트)를 실제로 실행하는 훅. `.git/hooks/post-merge`로 복사 후 실행권한을 줘야 활성화된다 (파일명이 `.sample`인 동안은 git이 무시함).
 
+**참고용 다이어그램 — 실제 `github-actions-harness.yml` job 흐름(최종 근거는 위 설명과 그 파일 자체):**
+```mermaid
+flowchart TD
+    A["push/PR: feature 브랜치"] --> B["unit-and-integration job<br/>(6단계, PR이면 7단계도)"]
+    B --> C["push: main/develop"] --> D["full-system-and-security job<br/>(8, 9단계)"]
+    D --> E["release 생성"] --> F["deploy-test job (10단계)"]
+    F --> G["documentation-handoff job (11단계)"]
+    G --> H{"deploy job — environment 보호규칙<br/>required reviewers 승인?"}
+    H -->|미승인| H
+    H -->|승인| I["deploy job (12단계)"]
+    I --> J["post-deploy-verify job (13단계)"]
+```
+
+**참고용 다이어그램 — `run-harness-agent.sh` 종료 코드 판정:**
+```mermaid
+flowchart TD
+    A["claude -p 헤드리스 실행"] --> B{출력 첫 줄}
+    B -->|"HARNESS_DONE: PASS"| C["종료코드 0 → CI 성공"]
+    B -->|"HARNESS_DONE: FAIL"| D["종료코드 1 → CI 실패"]
+    B -->|"HARNESS_BLOCKED: ..."| E["종료코드 75 → CI 대기/실패 처리<br/>사람이 질문에 답한 뒤 재실행"]
+```
+
 ## 아직 구현되지 않은 것 (알고 있어야 할 한계)
 - **1~4단계(트렌드분석/기획/설계/디자인서)는 자동 트리거가 없다.** 의도적 설계다 — 이 상류 단계는 비즈니스 판단이 들어가므로 사람이 트리거·검토하는 것을 권장한다.
 - 여러 work unit이 동시에 진행 중일 때 "지금 몇 번째까지 끝났는지" 판단은 `docs/harness/` 파일 존재 여부로 에이전트가 스스로 스캔하게 위임했다 (스크립트가 별도 상태 DB를 관리하지 않음). 프로젝트 규모가 커지면 이 방식의 한계(스캔 시간, 동시 실행 충돌 등)를 재검토할 것.
@@ -24,3 +46,9 @@
 1. 먼저 5~11, 13단계를 CI에서 자동 실행하도록 연결한다 (질문 발생 시 정지하는 로직 포함).
 2. 12단계는 마지막까지 수동 승인 게이트로 남겨둔다.
 3. 파이프라인이 안정화된 후에만 git hook 기반의 로컬 자동화(5→6)를 추가로 도입한다.
+
+```mermaid
+flowchart LR
+    A["1. 5~11,13단계 CI 자동화"] --> B["2. 12단계는 수동 승인 게이트 유지"]
+    B --> C["3. 안정화 후 git hook(5→6) 추가"]
+```
