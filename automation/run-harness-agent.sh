@@ -46,7 +46,7 @@ TS="$(date -u +%Y%m%dT%H%M%SZ)"
 RESULT_JSON="${OUT_DIR}/${STAGE}-${TS}.json"
 
 PROMPT=$(cat <<EOF
-ORCHESTRATOR.md에 정의된 전역 규칙(A~H)을 반드시 지킨다. 특히 지금은 CI(무인 환경)에서 실행 중이라
+ORCHESTRATOR.md에 정의된 전역 규칙(A~J)을 반드시 지킨다. 특히 지금은 CI(무인 환경)에서 실행 중이라
 사람이 실시간으로 질문에 답할 수 없다는 점을 명심한다.
 
 - 규칙 A에 해당하는 상황(모르면 물어봐야 하는 상황)을 만나면, 절대로 추측해서 진행하지 말고
