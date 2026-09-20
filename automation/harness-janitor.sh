@@ -10,6 +10,9 @@
 #   ./automation/harness-janitor.sh            # 점검만 함 (기본값)
 #   ./automation/harness-janitor.sh --check     # 위와 동일 (명시적 별칭)
 #   ./automation/harness-janitor.sh --clean     # 점검 후 .harness-tmp/ 내용만 삭제 (레거시 패턴은 삭제 안 함, 목록만 안내)
+#                                               주의: 병렬로 실행 중인 에이전트/CI 잡이 하나라도 있으면 실행하지 말 것 —
+#                                               그들이 쓰는 .harness-tmp/ 환경까지 통째로 지운다 (세션 시작·재개 시점이나
+#                                               병렬 웨이브가 모두 끝난 뒤에만 사용. ORCHESTRATOR.md 1장 "병렬 실행 모드" 참고)
 #
 # 종료 코드:
 #   0 = 잔여물 없음 (또는 --clean으로 정리까지 완료)
