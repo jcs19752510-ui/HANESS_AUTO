@@ -27,6 +27,7 @@ Slack/Teams 등 알림 MCP가 연결되어 있으면, 배포 시작/완료/롤�
 3. 배포 중 발생한 이상 징후와 조치
 4. 배포 완료 시각 및 배포된 버전/커밋 해시
 5. 롤백 실행 여부 (했다면 사유와 결과)
+6. **릴리즈 노트** — `docs/harness/12-release-notes.md`를 `templates/release-notes-template.md` 형식으로 작성하고 SemVer 버전(`vX.Y.Z`)과 태그를 기록한다(ORCHESTRATOR.md 4장 부록 C). 프로젝트에 `CHANGELOG.md`가 있으면 같은 내용을 추가한다. 배포 승인 문구에 버전이 없으면 버전 번호는 규칙 A로 사용자에게 확인한다(임의 결정 금지).
 
 # 완료 조건
 배포 로그 작성 완료. 다음 단계(13번, 배포후 검증)로 즉시 handoff.

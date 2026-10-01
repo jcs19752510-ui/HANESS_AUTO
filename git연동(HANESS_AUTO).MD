@@ -1,52 +1,48 @@
-# 1. git 초기화
+# git 연동 절차 (HANESS_AUTO 템플릿 저장소)
+
+> 이 템플릿 저장소의 작업 브랜치는 `PROD`다. 아래 `<...>` 부분은 본인 값으로 바꿔 입력한다. 이메일·이름 같은 개인정보는 이 문서에 적지 않는다.
+
+```bash
+# 1. git 초기화 (이미 clone 했다면 생략)
 git init
 
-# 2. 내 이메일 등록 (따옴표 안에 본인 이메일을 적으세요)
-git config --global user.email "jcs197530@gmail.com"
+# 2~3. 본인 이메일·이름 등록 (이 저장소에만 적용하려면 --global 을 빼고 실행)
+git config --global user.email "<본인 이메일>"
+git config --global user.name "<본인 이름>"
 
-# 3. 내 이름 등록 (따옴표 안에 본인 영문 이름을 적으세요)
-git config --global user.name "정찬성"
+# 4. 원격 저장소 연결
+git remote add origin https://github.com/<소유자>/HANESS_AUTO.git
 
-# 4. 내 컴퓨터와 인터넷 창고 주소를 연결합니다.
-git remote add origin https://github.com/jcs19752510-ui/HANESS_AUTO.git
-
-# 5. 깃허브에 있는 main이나 PROD_SCH 같은 브랜치 정보들을 내 컴퓨터가 인식하게 됩니다.
+# 5. 원격 브랜치 정보 가져오기
 git fetch origin
 
-# 6. PROD_SCH 모두 데이터 로컬로 내리기
-git pull origin PROD_SCH
+# 6. PROD 브랜치로 이동 (로컬에 없으면 원격 PROD를 추적하며 생성)
+git switch PROD || git switch -c PROD --track origin/PROD
 
-# 7. 현재 브랜치명을 'PROD_SCH'으로 브랜치 생성
-git branch PROD_SCH
+# 7. 최신 내용 받기
+git pull origin PROD
 
-# 8. PROD_SCH 브랜치로 작업 공간을 이동 (Switch)
-git switch PROD_SCH
+# 8. 변경 확인 후 필요한 파일만 추가 (git add . 는 임시 파일이 섞일 수 있어 git status로 확인 후 사용)
+git status
+git add <파일 또는 폴더>
 
-# 9. 로컬 소스 추가할 목록 add
-git add .
+# 9. 커밋
+git commit -m "<변경 내용 요약>"
 
-# 10. 로컬 add한 소스 commit 항목에 추가(코멘트 추가)
-git commit -m "하네스 전체 자동화 프로그램"
+# 10. 원격에 올리기
+git push -u origin PROD
+```
 
-# 11. 로컬 commit한 항목 리모트 브랜치에 push
-git push origin PROD_SCH
+## 참고
+- 프로그램(프로젝트)을 새로 만들 때는 이 템플릿을 복사한 별도 저장소에서 작업한다(USAGE-GUIDE.md 참고). 그 저장소의 브랜치·PR·버전 규정은 ORCHESTRATOR.md 4장 부록 C를 따른다.
+- 과거에 쓰던 `PROD_SCH` 브랜치는 병합이 끝났다. 새 작업은 `PROD`에서 한다.
 
-# 12. 원격소스 로컬 브랜치에 내리기
-git pull origin PROD_SCH
-
-<!--
-참고용 다이어그램(최종 근거는 위 명령어 자체):
--->
 ```mermaid
 flowchart TD
-    A["1. git init"] --> B["2~3. 이메일/이름 등록"]
-    B --> C["4. remote add origin"]
-    C --> D["5. git fetch origin"]
-    D --> E["6. git pull origin PROD_SCH"]
-    E --> F["7. git branch PROD_SCH"]
-    F --> G["8. git switch PROD_SCH"]
-    G --> H["9. git add ."]
-    H --> I["10. git commit -m ..."]
-    I --> J["11. git push origin PROD_SCH"]
-    J --> K["12. git pull origin PROD_SCH"]
+    A["clone 또는 init"] --> B["이메일/이름 등록"]
+    B --> C["remote add + fetch"]
+    C --> D["switch PROD + pull"]
+    D --> E["status 확인 후 add"]
+    E --> F["commit"]
+    F --> G["push -u origin PROD"]
 ```
