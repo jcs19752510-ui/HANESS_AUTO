@@ -7,6 +7,9 @@
 - **인증**: CI에서는 보통 `ANTHROPIC_API_KEY` 환경변수/시크릿으로 인증한다. 조직 정책에 따라 다를 수 있으니, 실제로 붙이기 전에 그 러너 환경에서 `claude -p "hi"`가 동작하는지 먼저 확인할 것.
 - **`jq` 또는 `node`** 중 하나 — `claude -p --output-format json` 결과에서 최종 텍스트를 뽑아내는 데 사용.
 
+## 상시 CI 점검 권장 항목 (ORCHESTRATOR.md 4장 부록 D)
+하네스 단계 자동화와 별개로, 프로젝트 저장소에는 PR마다 시크릿 스캔(예: gitleaks), 의존성 취약점 스캔(npm audit/pip-audit/OSV 등), 린트·타입 검사, 회귀 테스트(`docs/harness/regression-suite.md`)를 돌리고, 의존성 자동 업데이트(Dependabot/Renovate)를 켜 둘 것을 권장한다. 도구 선택은 프로젝트 스택에 따르며(03 설계서), 근거가 없으면 규칙 A로 질문한다. 이 템플릿은 특정 도구를 강제하지 않는다.
+
 ## 파일
 - `run-harness-agent.sh` — 실제 실행 스크립트. `claude -p "..." --agent <stage> --output-format json --allowedTools "<해당 에이전트의 tools:>" --permission-mode dontAsk --permission-prompts none` 로 호출하고, 결과 첫 줄이 `HARNESS_DONE: PASS`/`HARNESS_DONE: FAIL`/`HARNESS_BLOCKED:` 중 무엇인지로 종료 코드를 결정한다 (0/1/75). 사용법과 종료 코드 의미는 파일 상단 주석 참고.
 - `harness-janitor.sh` — 규칙 K(중단-안전 정리) 점검 스크립트. `.harness-tmp/`와 레거시 위치(저장소 루트의 `.venv_*`, `venv/` 등)에 검증용 임시 아티팩트가 남아있는지 스캔한다. 기본(`--check`)은 읽기 전용 점검(잔여물 있으면 종료코드 1), `--clean`은 `.harness-tmp/` 안만 실제로 삭제한다 — 그 밖의 위치는 사용자 작업물일 가능성이 있어 자동 삭제하지 않고 목록만 안내한다(규칙 A/K5). 세션/파이프라인 재개 전, 그리고 커밋 전에 실행하는 것을 권장한다.
