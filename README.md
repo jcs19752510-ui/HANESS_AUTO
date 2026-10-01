@@ -11,6 +11,8 @@
 - `templates/decision-log-template.md` — 질문·답변·비가역적 결정을 append-only로 남기는 의사결정 로그 양식 (`docs/harness/decisions.md`)
 - `templates/traceability-matrix-template.md` — 기획서 요구사항(REQ-ID)이 설계→구현→테스트까지 빠짐없이 이어지는지 추적하는 매트릭스 (`docs/harness/traceability.md`, 2단계에서 생성)
 - `templates/harness-state-template.md` — 세션 재개용 진행 상태(`docs/harness/STATE.md`) / `threat-model-template.md` — 3단계 위협 모델(STRIDE) / `postmortem-template.md` — 13단계 사후분석 / `release-notes-template.md` — 12단계 릴리즈 노트
+- `templates/bugfix-template.md` — 버그 수정 업무의 02단계 대체 문서(변경 범위 모드)
+- 판정 어휘·Deferred(Low/Medium만 사용자 수용)·결함 ID(BUG-/DEF-)는 ORCHESTRATOR.md 규칙 C 보칙에 정의되어 있다.
 - `automation/` — 수동 호출 대신 CI/git hook으로 자동 트리거하고 싶을 때 쓰는 예시 (12단계 배포는 항상 사람 승인 게이트로 보호)
 - [ORCHESTRATOR.md 5장 "MCP 활용 가이드"](ORCHESTRATOR.md#5-mcpmodel-context-protocol-활용-가이드-선택) — 프로젝트에 GitHub/Playwright/Sentry/Slack 등 MCP가 연결되어 있을 때 각 단계에서 선택적으로 활용하는 방법 (강제 아님, 미연결 시 기존 방식으로 항상 대체됨)
 

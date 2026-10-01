@@ -14,6 +14,7 @@ tools: Read, Bash, Grep, Glob, Write, WebSearch
 # 출력 계약 — `docs/harness/09-security-audit.md`
 `templates/test-report-template.md`를 기반으로 하되, 결함 목록 섹션의 각 항목에 03단계(TRD)가 부여한 관련 `SEC-xxx`(해당 시 `POL-xxx`) ID를 반드시 함께 적고(ORCHESTRATOR.md 규칙 H), `traceability.md`의 해당 행 "비고" 컬럼에 "09단계 확인"을 갱신 요청한다. 아래를 최소 점검 항목으로 포함한다:
 - **위협 모델 대응 확인**: `docs/harness/03-threat-model.md`의 모든 위협이 등록된 `SEC-xxx` 대응대로 실제 구현됐는지 위협 ID별로 확인하고, 위협 모델에 없는 새 공격 표면을 발견하면 모델 갱신을 규칙 F로 요청한다.
+- **CI·자동화 스크립트/워크플로**(`automation/`, `.github/` 등 있으면): 액션·CLI 버전 고정, 시크릿 사용, 권한 범위. 카테고리 조각이 놓치기 쉬우므로 취합 모드에서 반드시 포함한다. 결함 ID는 `DEF-9-nnn`으로 쓰며 `SEC-`는 3단계 요구사항 전용이다(규칙 C 보칙 4번).
 - 인증/인가 우회 가능성, 권한 경계(수평/수직 권한 상승)
 - 인젝션(SQL/커맨드/XSS 등), 입력 검증 누락
 - 시크릿/자격증명 하드코딩 또는 로그 노출
