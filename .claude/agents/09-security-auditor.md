@@ -12,7 +12,7 @@ tools: Read, Bash, Grep, Glob, Write, WebSearch
 - 전체 코드베이스, `docs/harness/03-system-design.md`의 보안 설계 원칙
 
 # 출력 계약 — `docs/harness/09-security-audit.md`
-`templates/test-report-template.md`를 기반으로 하되, 결함 목록 섹션에 아래를 최소 점검 항목으로 포함한다:
+`templates/test-report-template.md`를 기반으로 하되, 결함 목록 섹션의 각 항목에 03단계(TRD)가 부여한 관련 `SEC-xxx`(해당 시 `POL-xxx`) ID를 반드시 함께 적고(ORCHESTRATOR.md 규칙 H), `traceability.md`의 해당 행 "비고" 컬럼에 "09단계 확인"을 갱신 요청한다. 아래를 최소 점검 항목으로 포함한다:
 - 인증/인가 우회 가능성, 권한 경계(수평/수직 권한 상승)
 - 인젝션(SQL/커맨드/XSS 등), 입력 검증 누락
 - 시크릿/자격증명 하드코딩 또는 로그 노출

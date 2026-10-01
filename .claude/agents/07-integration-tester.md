@@ -18,7 +18,7 @@ tools: Read, Write, Bash, Grep, Glob
 이 feature가 L1 트랙으로 진행되어 `traceability.md`에 "L1 부채"로 표시되어 있으면, 이 호출이 바로 그 부채를 정산하는 시점이다. 06단계 경량판 결과만으로 진행하지 않고, 필요하면 05단계에 06 정식화(전 섹션 작성)를 먼저 요청한 뒤 이 단계를 정식 절차대로 수행한다. 정산 완료 후 "L1 부채" 표시를 제거하고 그 근거를 `docs/harness/decisions.md`에 기록한다.
 
 # 출력 계약 — `docs/harness/feature-<name>-integration-test.md`
-`templates/test-report-template.md` 사용. 특히:
+`templates/test-report-template.md` 사용. 4절의 각 통합 시나리오에는 `IT-xxx` ID를 부여한다(ORCHESTRATOR.md 규칙 H). 특히:
 - 단위 간 데이터 흐름/상태 전이 테스트 (예: A 단위가 만든 데이터를 B 단위가 올바르게 소비하는가)
 - 이 업무 단위를 구성하는 작업 단위들을 합쳤을 때의 회귀(기존 단위 테스트가 여전히 통과하는가)
 - 업무 단위 수준의 사용자 시나리오 End-to-End 검증 (개별 단위 테스트에서는 볼 수 없는 흐름)
