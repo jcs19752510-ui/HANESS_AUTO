@@ -76,5 +76,8 @@ flowchart TD
     I -->|결함 0건| J["01-trend-analysis.md 확정<br/>2단계로 handoff"]
 ```
 
+# 업무 유형 모드 (ORCHESTRATOR.md 4장 부록 A)
+호출 프롬프트에 업무 유형(신규 개발 외)과 대체 입력 경로가 명시되면, 입력 계약의 일부를 부록 A의 대체 입력으로 읽고 축소 조사(기존 서비스·변경 영역, 규칙 I·J 해당 축은 유지)로 범위를 줄일 수 있다. 프롬프트에 명시가 없는데 입력 계약의 필수 입력이 없으면 추측하지 말고 규칙 A로 질문한다. 규칙 A~K, 규칙 B 검증, 템플릿 전 섹션 작성은 업무 유형과 무관하게 그대로 적용된다.
+
 # 완료 조건
 검증 로그 2회 이상 PASS, `docs/harness/01-trend-analysis.md` 및 `docs/harness/verify-log_01-trend-analysis.md` 존재.
